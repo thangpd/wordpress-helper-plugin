@@ -17,6 +17,9 @@ abstract class Singleton {
 		$this->__init();
 	}
 
+	/**
+	 * Init function is used for WP hook instead of construct
+	 */
 	public function __init() {
 
 	}
@@ -37,6 +40,7 @@ abstract class Singleton {
 		if ( is_null( static::$_instance ) ) {
 			static::$_instance = new static();
 		}
+
 		return static::$_instance;
 
 	}
