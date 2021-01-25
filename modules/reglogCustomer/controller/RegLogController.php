@@ -33,7 +33,7 @@ class RegLogController extends Controller {
 			if ( isset( $_COOKIE['summit-signup'] ) && ! empty( get_transient( $_COOKIE['summit-signup'] ) ) ) {
 				$template = $this->getViewPathActivationPage();
 			} else {
-				$this->deleteTransientCookie( $_COOKIE['summit-signup'] );
+				$this->deleteTransientCookie();
 				$template = $this->getViewPathRegister();
 			}
 		} elseif ( is_page( 'summit-login' ) ) {
