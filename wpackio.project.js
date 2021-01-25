@@ -1,6 +1,7 @@
 console.log('production')
 const pkg = require('./package.json');
-
+const path = require('path');
+console.log(path.resolve(__dirname, 'dist'))
 module.exports = {
     // Project Identity
     appName: 'wordpressHelperPlugins', // Unique name of your project
@@ -23,6 +24,13 @@ module.exports = {
             name: 'testapp',
             entry: {
                 main: ['./test.scss']
+            },
+            webpackConfig: {
+                output: {
+                    publicPath: path.resolve(__dirname, 'dist'),
+                    filename: '[name].bundle.css',
+                    path: path.resolve(__dirname, 'dist'),
+                },
             }
         }
         // If this has length === 1, then single compiler

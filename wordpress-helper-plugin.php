@@ -15,6 +15,7 @@ require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/config.php';
 
 use Elhelper\modules\reglogCustomer\controller\RegLogController;
+use Elhelper\modules\templateInclude\LeefeeTemplateInclude;
 use Elhelper\shortcode\ElHelperShortcode;
 use Elhelper\shortcode\ListingPriceShortcode;
 
@@ -172,6 +173,7 @@ class Elhelper_Plugin {
 	 */
 	public function init_controller() {
 		RegLogController::instance();
+		LeefeeTemplateInclude::instance();
 	}
 
 
