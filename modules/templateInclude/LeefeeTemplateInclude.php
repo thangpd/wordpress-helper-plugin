@@ -16,13 +16,15 @@ use Elhelper\common\Controller;
  *      + Include template
  */
 class LeefeeTemplateInclude extends Controller {
-	public function __construct() {
-		parent::__construct();
-		add_filter( 'template_include', [ $this, 'leefee_template_include' ] );
+	//Override $_instance. If not. It'll have the last object instance is initialized before this class.
+	protected static $_instance;
+
+	public function __init() {
+//		add_filter( 'template_include', [ $this, 'leefee_template_include' ] );
 	}
 
 
-	function leefee_template_include( $template ) {
+	function templateInclude( $template ) {
 		//we can't use query arg because can't coverage multiple dimension like : test/test/test
 		//add_query_arg( [] ) return request uri when empty array is pass as parameter.
 		//if ( str_replace( '/', '', add_query_arg( [] ) ) == 'test' ) {

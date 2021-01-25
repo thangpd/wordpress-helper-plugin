@@ -17,7 +17,6 @@
     <script type="module" src="<?php echo LEEFEE_URI_PATH.'/assets/js/leefee-general.js' ?>"></script>
 </head>
 <body>
-pok
-
+echo 'ok';
 </body>
 </html>

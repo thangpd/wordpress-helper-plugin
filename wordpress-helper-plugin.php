@@ -70,6 +70,10 @@ class Elhelper_Plugin {
 	 * @var Elhelper_Plugin The single instance of the class.
 	 */
 	private static $_instance = null;
+	/**
+	 * Controllers of all modules;
+	 */
+	private $controllers;
 
 	/**
 	 * Constructor
@@ -81,7 +85,6 @@ class Elhelper_Plugin {
 	public function __construct() {
 		add_action( 'init', [ $this, 'init' ] );
 		add_action( 'plugins_loaded', [ $this, 'i18n' ] );
-
 	}
 
 	/**
@@ -172,41 +175,18 @@ class Elhelper_Plugin {
 	 * @return void
 	 */
 	public function init_controller() {
-		RegLogController::instance();
-		LeefeeTemplateInclude::instance();
+		$this->controllers = [
+			LeefeeTemplateInclude::instance(),
+			RegLogController::instance(),
+		];
 	}
-
 
 	/**
 	 * Template include
 	 */
 	public function summit_template_include( $template ) {
-		$reglogController = RegLogController::instance();
-
-		if ( is_page( 'summit-register' ) ) {
-			if ( is_user_logged_in() ) {
-				wp_redirect( site_url() );
-			}
-			if ( isset( $_COOKIE['summit-signup'] ) && ! empty( get_transient( $_COOKIE['summit-signup'] ) ) ) {
-				$template = $reglogController->getViewPathActivationPage();
-			} else {
-				$reglogController->deleteTransientCookie( $_COOKIE['summit-signup'] );
-				$template = $reglogController->getViewPathRegister();
-			}
-		} elseif ( is_page( 'summit-login' ) ) {
-			if ( is_user_logged_in() ) {
-				wp_redirect( site_url() );
-			}
-			$template = $reglogController->getViewPathLogin();
-		} elseif ( is_page( 'summit-active' ) ) {
-			if ( is_user_logged_in() ) {
-				wp_redirect( site_url() );
-			}
-			if ( isset( $_GET['active_key'] ) ) {
-				$template = $reglogController->getViewPathActivePage();
-			} else {
-				wp_redirect( site_url() . '/summit-register' );
-			}
+		foreach ( $this->controllers as $controller ) {
+			$template = $controller->templateInclude( $template );
 		}
 
 		return $template;
