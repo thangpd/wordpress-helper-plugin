@@ -15,7 +15,7 @@ require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/config.php';
 
 use Elhelper\modules\reglogCustomer\controller\RegLogController;
-use Elhelper\modules\templateInclude\LeefeeTemplateInclude;
+use Elhelper\modules\templateInclude\LeefeeTemplateIncludeController;
 use Elhelper\shortcode\ElHelperShortcode;
 use Elhelper\shortcode\ListingPriceShortcode;
 
@@ -75,6 +75,8 @@ class Elhelper_Plugin {
 	 */
 	private $controllers;
 
+	private $enqueue;
+
 	/**
 	 * Constructor
 	 *
@@ -84,7 +86,13 @@ class Elhelper_Plugin {
 	 */
 	public function __construct() {
 		add_action( 'init', [ $this, 'init' ] );
-		add_action( 'plugins_loaded', [ $this, 'i18n' ] );
+		add_action( 'init', function () {
+			return load_plugin_textdomain( 'elhelper' );
+		} );
+
+		//https://wpack.io/guides/using-wpackio-enqueue/#why-call-it-early
+		$this->enqueue = new \WPackio\Enqueue( 'wordpressHelperPlugins', 'dist', '1.0.0', 'plugin', __FILE__ );
+
 	}
 
 	/**
@@ -106,23 +114,6 @@ class Elhelper_Plugin {
 		}
 
 		return self::$_instance;
-
-	}
-
-	/**
-	 * Load Textdomain
-	 *
-	 * Load plugin localization files.
-	 *
-	 * Fired by `init` action hook.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @access public
-	 */
-	public function i18n() {
-
-		load_plugin_textdomain( 'elhelper' );
 
 	}
 
@@ -176,7 +167,7 @@ class Elhelper_Plugin {
 	 */
 	public function init_controller() {
 		$this->controllers = [
-			LeefeeTemplateInclude::instance(),
+			LeefeeTemplateIncludeController::instance(),
 			RegLogController::instance(),
 		];
 	}
@@ -222,8 +213,7 @@ class Elhelper_Plugin {
 			array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'we_value' => 1234 ) );
 
 		//wpackio
-		$enqueue = new \WPackio\Enqueue( 'wordpressHelperPlugins', 'dist', '1.0.0', 'plugin', __FILE__ );
-		$enqueue->enqueue( 'testapp', 'main', [] );
+		$this->enqueue->enqueue( 'testapp', 'main', [] );
 
 	}
 

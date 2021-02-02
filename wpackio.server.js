@@ -1,4 +1,3 @@
-console.log('server')
 module.exports = {
     // Your LAN IP or host where you would want the live server
     // Override this if you know your correct external IP (LAN)
