@@ -17,16 +17,9 @@ class TestShortcode extends Shortcode {
 
 	public function render_shortcode( $attr = [], $content = '' ) {
 		Elhelper_Plugin::instance()->wpackio_enqueue( 'testapp', 'test_shortcode' );
-		$res_html = <<<HTML
-<div class="r-carousel">
-  <div class="r-carousel__item"><img class="r-carousel__img" src="https://image.shutterstock.com/image-vector/example-sign-paper-origami-speech-260nw-1164503347.jpg"/></div>
-  <div class="r-carousel__item"><img class="r-carousel__img" src="https://image.shutterstock.com/image-vector/example-sign-paper-origami-speech-260nw-1164503347.jpg"/></div>
-  <div class="r-carousel__item"><img class="r-carousel__img" src="https://image.shutterstock.com/image-vector/example-sign-paper-origami-speech-260nw-1164503347.jpg"/></div>
-  <div class="r-carousel__item"><img class="r-carousel__img" src="https://image.shutterstock.com/image-vector/example-sign-paper-origami-speech-260nw-1164503347.jpg"/></div>
-</div>
-HTML;
+		$template_path = plugin_dir_path( __FILE__ ) . 'views/test-shortcode/index.php';
 
-		return $res_html;
+		return $this->render( $template_path, [ 'context' => 'test' ] );
 	}
 
 	protected function get_name() {
