@@ -191,7 +191,6 @@ class Elhelper_Plugin {
 	 */
 	function enqueue_script( $hook ) {
 		//lib
-		wp_register_script( 'slick', plugins_url( '/assets/lib/slick/slick.min.js', __FILE__ ), array( 'jquery' ) );
 		wp_register_script( 'jquery-md5-js', plugins_url( '/assets/lib/jquery-lib/jquery.md5.js', __FILE__ ), array( 'jquery' ) );
 		wp_register_script( 'html5lightbox', plugins_url( '/assets/lib/html5lightbox/html5lightbox.js', __FILE__ ), [ 'jquery' ] );
 		wp_register_script( 'bootstrap', plugins_url( '/assets/lib/bootstrap/js/bootstrap.min.js', __FILE__ ), array( 'jquery' ) );
