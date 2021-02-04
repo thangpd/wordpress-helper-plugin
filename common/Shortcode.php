@@ -21,6 +21,8 @@ abstract class Shortcode extends Base {
 
 	abstract function render_shortcode( $attr = [], $content = '' );
 
-	abstract function enqueue_scripts();
+	public function enqueue_scripts() {
+
+	}
 
 }

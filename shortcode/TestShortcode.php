@@ -15,15 +15,9 @@ use Elhelper\Elhelper_Plugin;
 class TestShortcode extends Shortcode {
 
 
-	function enqueue_scripts() {
-//		wp_register_script();
-//		wp_register_style();
-	}
-
 	public function render_shortcode( $attr = [], $content = '' ) {
 		Elhelper_Plugin::instance()->wpackio_enqueue( 'testapp', 'test_shortcode' );
 		$res_html = <<<HTML
-		 
 <div class="r-carousel">
   <div class="r-carousel__item"><img class="r-carousel__img" src="https://image.shutterstock.com/image-vector/example-sign-paper-origami-speech-260nw-1164503347.jpg"/></div>
   <div class="r-carousel__item"><img class="r-carousel__img" src="https://image.shutterstock.com/image-vector/example-sign-paper-origami-speech-260nw-1164503347.jpg"/></div>
@@ -33,7 +27,6 @@ class TestShortcode extends Shortcode {
 HTML;
 
 		return $res_html;
-
 	}
 
 	protected function get_name() {
