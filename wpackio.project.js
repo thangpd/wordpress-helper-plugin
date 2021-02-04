@@ -65,7 +65,6 @@ module.exports = {
     // Externals
     // <https://webpack.js.org/configuration/externals/>
     externals: {
-        jquery: 'jQuery',
     },
     // Webpack Aliases
     // <https://webpack.js.org/configuration/resolve/#resolve-alias>
