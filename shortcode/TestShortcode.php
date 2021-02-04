@@ -10,6 +10,7 @@ namespace Elhelper\shortcode;
 
 
 use Elhelper\common\Shortcode;
+use Elhelper\Elhelper_Plugin;
 
 class TestShortcode extends Shortcode {
 
@@ -20,8 +21,13 @@ class TestShortcode extends Shortcode {
 	}
 
 	public function render_shortcode( $attr = [], $content = '' ) {
+		Elhelper_Plugin::instance()->wpackio_enqueue( 'testapp', 'test_shortcode' );
+		$res_html = <<<HTML
+		<div class="test">ok
+		</div>
+HTML;
 
-		return 'ok';
+		return $res_html;
 
 	}
 

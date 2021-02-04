@@ -23,7 +23,8 @@ module.exports = {
         {
             name: 'testapp',
             entry: {
-                main: ['./assets/index.js']
+                main: ['./assets/index.js'],
+                test_shortcode: ['./shortcode/assets/test_shortcode/index.js'],
             },
             webpackConfig: {}
         }

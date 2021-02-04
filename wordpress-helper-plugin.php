@@ -18,6 +18,7 @@ use Elhelper\modules\reglogCustomer\controller\RegLogController;
 use Elhelper\modules\templateInclude\LeefeeTemplateIncludeController;
 use Elhelper\shortcode\ElHelperShortcode;
 use Elhelper\shortcode\ListingPriceShortcode;
+use Elhelper\shortcode\TestShortcode;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -58,7 +59,10 @@ class Elhelper_Plugin {
 	 * @var string Minimum PHP version required to run the plugin.
 	 */
 	const MINIMUM_PHP_VERSION = '7.0';
-
+	/**
+	 * declare enqueue wpackio scripts/styles
+	 */
+	public static $enqueue;
 	/**
 	 * Instance
 	 *
@@ -75,8 +79,6 @@ class Elhelper_Plugin {
 	 */
 	private $controllers;
 
-	private $enqueue;
-
 	/**
 	 * Constructor
 	 *
@@ -91,7 +93,7 @@ class Elhelper_Plugin {
 		} );
 
 		//https://wpack.io/guides/using-wpackio-enqueue/#why-call-it-early
-		$this->enqueue = new \WPackio\Enqueue( 'wordpressHelperPlugins', 'dist', '1.0.0', 'plugin', __FILE__ );
+		self::$enqueue = new \WPackio\Enqueue( 'wordpressHelperPlugins', 'dist', '1.0.0', 'plugin', __FILE__ );
 
 	}
 
@@ -158,7 +160,7 @@ class Elhelper_Plugin {
 
 		new ElHelperShortcode();
 		new ListingPriceShortcode();
-
+		new TestShortcode();
 	}
 
 	/**
@@ -212,10 +214,15 @@ class Elhelper_Plugin {
 		wp_localize_script( 'elhelper-script', 'ajax_object',
 			array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'we_value' => 1234 ) );
 
-		//wpackio
-		$this->enqueue->enqueue( 'testapp', 'main', [] );
+		self::$_instance->wpackio_enqueue( 'testapp', 'main', [] );
 
 	}
+
+	public function wpackio_enqueue( $app, $entry, $params = [] ) {
+		//wpackio
+		self::$enqueue->enqueue( $app, $entry, $params );
+	}
+
 
 	/**
 	 * Admin notice
