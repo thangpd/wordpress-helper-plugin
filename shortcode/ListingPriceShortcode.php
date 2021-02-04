@@ -7,11 +7,10 @@
 namespace Elhelper\shortcode;
 
 
-use Elhelper\common\Shortcode;
 use Elhelper\inc\HelperShortcode;
 use Elhelper\model\BhhsModel;
 
-class ListingPriceShortcode extends Shortcode {
+class ListingPriceShortcode {
 
 	public function __construct() {
 		add_shortcode( 'summit_listing_price', [ $this, 'summit_listing_price_shortcode' ] );
