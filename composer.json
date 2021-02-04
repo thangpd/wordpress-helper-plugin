@@ -2,8 +2,8 @@
   "require": {
     "monolog/monolog": "1.0.*",
     "kub-at/php-simple-html-dom-parser": "^1.7",
-    "wpackio/enqueue": "^2.2"
-
+    "wpackio/enqueue": "^2.2",
+    "ext-json": "*"
   },
   "autoload": {
     "psr-4": {

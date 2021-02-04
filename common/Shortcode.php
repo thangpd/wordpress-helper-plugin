@@ -1,0 +1,15 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: tom
+ * Date: 2/3/21
+ * Time: 5:41 PM
+ */
+
+namespace Elhelper\common;
+
+
+class Shortcode extends Base {
+
+	
+}
