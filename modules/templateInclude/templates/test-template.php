@@ -5,6 +5,5 @@
  */
 wp_head();
 ?>
-
-
+ok
 <?php wp_footer() ?>

@@ -215,6 +215,10 @@ class Elhelper_Plugin {
 
 	}
 
+	/**
+	 * https://wpack.io/apis/php-api/
+	 * Wpackio enqueue
+	 */
 	public function wpackio_enqueue( $app, $entry, $params = [] ) {
 		//wpackio
 		self::$enqueue->enqueue( $app, $entry, $params );
