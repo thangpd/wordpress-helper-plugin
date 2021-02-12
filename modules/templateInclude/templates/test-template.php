@@ -5,10 +5,6 @@
  */
 wp_head();
 echo __FILE__;
-global $wp_scripts;
-echo '<pre>';
-print_r($wp_scripts);
-echo '</pre>';
 
 
 ?>
