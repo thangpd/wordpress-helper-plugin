@@ -121,13 +121,6 @@ class Elhelper_Plugin {
 	}
 
 	/**
-	 * Get $config
-	 */
-	public function getConfig() {
-		return self::$_instance->config;
-	}
-
-	/**
 	 * Initialize the plugin
 	 *
 	 * Load the plugin only after Elementor (and other plugins) are loaded.
@@ -199,7 +192,7 @@ class Elhelper_Plugin {
 	 */
 	function enqueue_script( $hook ) {
 		//lib
-		wp_register_script( 'jquery-md5-js', plugins_url( '/assets/lib/jquery-lib/jquery.md5.js', __FILE__ ), array( 'jquery' ) );
+		/*wp_register_script( 'jquery-md5-js', plugins_url( '/assets/lib/jquery-lib/jquery.md5.js', __FILE__ ), array( 'jquery' ) );
 		wp_register_script( 'html5lightbox', plugins_url( '/assets/lib/html5lightbox/html5lightbox.js', __FILE__ ), [ 'jquery' ] );
 		wp_register_script( 'bootstrap', plugins_url( '/assets/lib/bootstrap/js/bootstrap.min.js', __FILE__ ), array( 'jquery' ) );
 		wp_register_script( 'jquery-validate', 'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js', array( 'jquery' ) );
@@ -217,10 +210,67 @@ class Elhelper_Plugin {
 		wp_enqueue_script( 'elhelper-script', plugins_url( '/assets/js/el-helper-plugin.js', __FILE__ ), array( 'jquery' ) );
 		wp_enqueue_style( 'elhelper-style', plugins_url( '/assets/css/el-helper-style.css', __FILE__ ) );
 		wp_localize_script( 'elhelper-script', 'ajax_object',
-			array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'we_value' => 1234 ) );
+			array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'we_value' => 1234 ) );*/
+		$default_arr = [
+			'item_script' => [
+				'src'       => '',
+				'dep'       => '',
+				'ver'       => '',
+				'in_footer' => '',
+			],
+			'item_style'  => [
+				'src'   => '',
+				'dep'   => '',
+				'ver'   => '',
+				'media' => '',
+			]
+		];
+		$config      = self::getConfig();
+		if ( ! empty( $config['enqueue_scripts'] ) ) {
+			foreach ( $config['enqueue_scripts']['script'] as $key => $item ) {
+				$this->enqueue_script_helper( $key, $item, $default_arr );
+			}
+			foreach ( $config['enqueue_scripts']['style'] as $key => $item ) {
+				$this->enqueue_style_helper( $key, $item, $default_arr );
+			}
+		}
 
 		self::$_instance->wpackio_enqueue( 'testapp', 'main', [] );
 
+	}
+
+	/**
+	 * Get $config
+	 */
+	public function getConfig() {
+		return self::$_instance->config;
+	}
+
+	/**
+	 * Enqueue script and style from array list $this->config  config.php
+	 */
+	public function enqueue_script_helper( $callable, $arr_list, $default_arr ) {
+		foreach ( $arr_list as $key => $item ) {
+			$item = array_merge( $default_arr['item_script'], $item );
+			call_user_func( $callable, $key, $item['src'], $item['dep'], $item['ver'], $item['in_footer'] );
+			if ( isset( $item['locallize_script'] ) ) {
+				foreach ( $item['locallize_script'] as $lo_key => $lo_item ) {
+					if ( is_array( $lo_item ) ) {
+						wp_localize_script( $key, $lo_key, $lo_item );
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * Enqueue script and style from array list $this->config config.php
+	 */
+	public function enqueue_style_helper( $callable, $arr_list, $default_arr ) {
+		foreach ( $arr_list as $key => $item ) {
+			$item = array_merge( $default_arr['item_style'], $item );
+			call_user_func( $callable, $key, $item['src'], $item['dep'], $item['ver'], $item['media'] );
+		}
 	}
 
 	/**

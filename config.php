@@ -9,8 +9,8 @@ define( 'WP_HELPER_PATH', plugin_dir_path( __FILE__ ) );
 
 return [
 	'enqueue_scripts' => [
-		'register' => [
-			'script' => [
+		'script' => [
+			'wp_register_script' => [
 				'jquery-md5-js'                     => [
 					plugins_url( '/assets/lib/jquery-lib/jquery.md5.js', __FILE__ ),
 					array( 'jquery' ),
@@ -35,20 +35,7 @@ return [
 					)
 				]
 			],
-			'style'  => [
-				'bootstrap'        => [
-					plugins_url( '/assets/lib/bootstrap/css/bootstrap.min.css', __FILE__ ),
-				],
-				'font-awesome-all' => [
-					plugins_url( '/assets/lib/fontawesome/css/all.css', __FILE__ ),
-				],
-				'font-awesome'     => [
-					plugins_url( '/assets/lib/fontawesome/css/fontawesome.css', __FILE__ ),
-				],
-			],
-		],
-		'enqueue'  => [
-			'script' => [
+			'wp_enqueue_script'  => [
 				'elhelper-script' => [
 					'src'              => plugins_url( '/assets/js/el-helper-plugin.js', __FILE__ ),
 					'dep'              => array( 'jquery' ),
@@ -62,14 +49,28 @@ return [
 					],
 				],
 			],
-			'style'  => [
+		],
+		'style'  => [
+			'wp_enqueue_style'  => [
 				'elhelper-style' => [
-					'src'       => plugins_url( '/assets/css/el-helper-style.css', __FILE__ ),
-					'dep'       => '',
-					'ver'       => '',
-					'in_footer' => '',
+					'src'   => plugins_url( '/assets/css/el-helper-style.css', __FILE__ ),
+					'dep'   => '',
+					'ver'   => '',
+					'media' => '',
 				]
 			],
-		],
+			'wp_register_style' => [
+				'bootstrap'        => [
+					plugins_url( '/assets/lib/bootstrap/css/bootstrap.min.css', __FILE__ ),
+				],
+				'font-awesome-all' => [
+					plugins_url( '/assets/lib/fontawesome/css/all.css', __FILE__ ),
+				],
+				'font-awesome'     => [
+					plugins_url( '/assets/lib/fontawesome/css/fontawesome.css', __FILE__ ),
+				],
+			],
+		]
+
 	]
 ];
