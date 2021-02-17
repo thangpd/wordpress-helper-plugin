@@ -54,7 +54,7 @@ class RegLogController extends Controller {
 	}
 
 	public function getViewPathActivationPage() {
-		return $this->render( 'activation-page.php' );
+		return $this->render( static::$_instance->view_path . 'views' . DIRECTORY_SEPARATOR .'activation-page.php' );
 	}
 
 	public function deleteTransientCookie() {
@@ -63,17 +63,17 @@ class RegLogController extends Controller {
 	}
 
 	public function getViewPathRegister() {
-		$render = $this->render( 'register-template.php' );
+		$render = $this->render( static::$_instance->view_path . 'views' . DIRECTORY_SEPARATOR .'register-template.php' );
 
 		return $render;
 	}
 
 	public function getViewPathLogin() {
-		return $this->render( 'login-template.php' );
+		return $this->render( static::$_instance->view_path . 'views' . DIRECTORY_SEPARATOR .'login-template.php' );
 	}
 
 	public function getViewPathActivePage() {
-		return $this->render( 'active-page.php' );
+		return $this->render( static::$_instance->view_path . 'views' . DIRECTORY_SEPARATOR .'active-page.php' );
 	}
 
 	public function __init() {
@@ -185,7 +185,7 @@ HTML;
 	}
 
 	public function getViewPathEmailTemplate() {
-		return $this->render( 'email-template.php' );
+		return $this->render( static::$_instance->view_path . 'views' . DIRECTORY_SEPARATOR .'email-template.php' );
 	}
 
 	public function sendMailRegister( $customerEmail, $subject, $message ) {
@@ -203,7 +203,7 @@ HTML;
 	}
 
 	public function getViewPathActivationTemplate() {
-		return $this->render( 'activation-template.php' );
+		return $this->render( static::$_instance->view_path . 'views' . DIRECTORY_SEPARATOR .'activation-template.php' );
 	}
 
 	public function actionLoginAjax() {
