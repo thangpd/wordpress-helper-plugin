@@ -15,6 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use Elhelper\modules\reglogCustomer\controller\RegLogController;
 use Elhelper\modules\templateInclude\LeefeeTemplateIncludeController;
+use Elhelper\modules\zaloApiModule\ZaloApiController;
 use Elhelper\shortcode\ElHelperShortcode;
 use Elhelper\shortcode\ListingPriceShortcode;
 use Elhelper\shortcode\TestShortcode;
@@ -191,6 +192,7 @@ class Elhelper_Plugin {
 		$this->controllers = [
 			LeefeeTemplateIncludeController::instance(),
 			RegLogController::instance(),
+			ZaloApiController::instance(),
 		];
 	}
 

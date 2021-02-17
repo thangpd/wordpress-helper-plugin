@@ -23,6 +23,12 @@ class RegLogController extends Controller {
 		wp_enqueue_style( 'register-template-css', plugins_url( '/assets/reglogcustomer.css', __DIR__ ), [ 'bootstrap' ] );
 	}
 
+	/**
+	 *
+	 * Template include
+	 *
+	 * @return string path. Not return rendered html
+	 */
 	public function templateInclude( $template ) {
 		if ( is_page( 'summit-register' ) ) {
 			if ( is_user_logged_in() ) {
@@ -54,7 +60,7 @@ class RegLogController extends Controller {
 	}
 
 	public function getViewPathActivationPage() {
-		return $this->render( static::$_instance->view_path . 'views' . DIRECTORY_SEPARATOR .'activation-page.php' );
+		return $this->render(  'activation-page.php' );
 	}
 
 	public function deleteTransientCookie() {
@@ -63,17 +69,17 @@ class RegLogController extends Controller {
 	}
 
 	public function getViewPathRegister() {
-		$render = $this->render( static::$_instance->view_path . 'views' . DIRECTORY_SEPARATOR .'register-template.php' );
+		$render = $this->render(  'register-template.php' );
 
 		return $render;
 	}
 
 	public function getViewPathLogin() {
-		return $this->render( static::$_instance->view_path . 'views' . DIRECTORY_SEPARATOR .'login-template.php' );
+		return $this->render(  'login-template.php' );
 	}
 
 	public function getViewPathActivePage() {
-		return $this->render( static::$_instance->view_path . 'views' . DIRECTORY_SEPARATOR .'active-page.php' );
+		return $this->render(  'active-page.php' );
 	}
 
 	public function __init() {
@@ -185,7 +191,7 @@ HTML;
 	}
 
 	public function getViewPathEmailTemplate() {
-		return $this->render( static::$_instance->view_path . 'views' . DIRECTORY_SEPARATOR .'email-template.php' );
+		return $this->render(  'email-template.php' );
 	}
 
 	public function sendMailRegister( $customerEmail, $subject, $message ) {
@@ -203,7 +209,7 @@ HTML;
 	}
 
 	public function getViewPathActivationTemplate() {
-		return $this->render( static::$_instance->view_path . 'views' . DIRECTORY_SEPARATOR .'activation-template.php' );
+		return $this->render(  'activation-template.php' );
 	}
 
 	public function actionLoginAjax() {
