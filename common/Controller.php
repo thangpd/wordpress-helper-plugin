@@ -11,7 +11,7 @@ abstract class Controller extends Singleton {
 	public $view_path = '';
 
 	public function templateInclude( $template ) {
-
+		return $template;
 	}
 
 	public function render( $path ) {

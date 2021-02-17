@@ -92,7 +92,7 @@ class Elhelper_Plugin {
 		add_action( 'init', function () {
 			return load_plugin_textdomain( 'elhelper' );
 		} );
-
+		register_activation_hook( __FILE__, [ $this, 'elhelper_rewrite_activation' ] );
 		//https://wpack.io/guides/using-wpackio-enqueue/#why-call-it-early
 		self::$enqueue = new \WPackio\Enqueue( 'wordpressHelperPlugins', 'dist', '1.0.0', 'plugin', __FILE__ );
 
@@ -121,13 +121,30 @@ class Elhelper_Plugin {
 	}
 
 	/**
+	 * rewrite activation
+	 */
+	public function elhelper_rewrite_activation() {
+
+		$this->add_rewrite_rules();
+		flush_rewrite_rules( true );
+	}
+
+	/**
+	 * Add Rewrite Rule
+	 */
+	public function add_rewrite_rules() {
+		add_rewrite_rule( '^welcome$', 'index.php?p=36', 'top' );
+		add_rewrite_rule(
+			'^submit/?$',
+			'index.php?form=true',
+			'top'
+		);
+		//testing so flush after refresh everytime
+		flush_rewrite_rules( true );
+	}
+
+	/**
 	 * Initialize the plugin
-	 *
-	 * Load the plugin only after Elementor (and other plugins) are loaded.
-	 * Checks for basic plugin requirements, if one check fail don't continue,
-	 * if all check have passed load the files required to run the plugin.
-	 *
-	 * Fired by `plugins_loaded` action hook.
 	 *
 	 * @since 1.0.0
 	 *
@@ -151,6 +168,8 @@ class Elhelper_Plugin {
 
 		$this->init_controller();
 
+		//testing only. Comment after test rewrite rule.
+		$this->add_rewrite_rules();
 	}
 
 	/**
