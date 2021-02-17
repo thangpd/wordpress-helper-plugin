@@ -26,7 +26,8 @@ module.exports = {
                 main: ['./assets/index.js'],
                 test_shortcode: ['./shortcode/assets/test_shortcode/index.js'],
                 template_include: ['./modules/templateInclude/assets/index.js'],
-                zaloapi: ['./modules/zaloApi/assets/index.js'],
+                zaloapi: ['./modules/zaloApiModule/assets/index.js'],
+                zaloApiShortcode: ['./shortcode/zaloApi/assets'],
             },
             webpackConfig: {}
         }
