@@ -26,8 +26,10 @@ class ZaloApiController extends Controller {
 		add_action( 'wp_enqueue_scripts', [ $this, 'add_enqueue_scripts' ] );
 	}
 
+
+	//can't separate enqueue specifically
 	public function add_enqueue_scripts() {
-		Elhelper_Plugin::instance()->wpackio_enqueue( 'testapp', 'zaloapi' );
+//		Elhelper_Plugin::instance()->wpackio_enqueue( 'testapp', 'zaloapi' );
 	}
 
 
@@ -40,7 +42,7 @@ class ZaloApiController extends Controller {
 
 //			$plugin_dir_path = plugin_dir_path( __FILE__ ) . 'views/index.php';
 //			$template        = $plugin_dir_path;
-			$template        = $this->render('index.php');
+			$template = $this->render( 'index.php' );
 		}
 
 

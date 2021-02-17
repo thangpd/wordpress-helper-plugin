@@ -19,6 +19,7 @@ use Elhelper\modules\zaloApiModule\ZaloApiController;
 use Elhelper\shortcode\ElHelperShortcode;
 use Elhelper\shortcode\ListingPriceShortcode;
 use Elhelper\shortcode\TestShortcode;
+use Elhelper\shortcode\zaloApi\ZaloApiShortcode;
 
 /**
  * Main Elementor Test Extension Class
@@ -182,6 +183,7 @@ class Elhelper_Plugin {
 		new ElHelperShortcode();
 		new ListingPriceShortcode();
 		new TestShortcode();
+		new ZaloApiShortcode();
 	}
 
 	/**
