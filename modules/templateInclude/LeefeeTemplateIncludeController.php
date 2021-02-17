@@ -9,6 +9,7 @@
 namespace Elhelper\modules\templateInclude;
 
 use Elhelper\common\Controller;
+use Elhelper\Elhelper_Plugin;
 
 /**Template include template test
  * How to use:
@@ -26,10 +27,7 @@ class LeefeeTemplateIncludeController extends Controller {
 	}
 
 	public function add_enqueue_scripts() {
-		wp_register_script( 'leefee_template_js', plugins_url( '/assets/leefee_scripts.js', __FILE__ ), 'jquery' );
-		wp_register_style( 'leefee_template_css', plugins_url( '/assets/leefee_style.css', __FILE__ ) );
-		wp_enqueue_script( 'leefee_template_js' );
-		wp_enqueue_style( 'leefee_template_css' );
+		Elhelper_Plugin::instance()->wpackio_enqueue( 'testapp', 'template_include' );
 	}
 
 

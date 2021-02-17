@@ -25,6 +25,7 @@ module.exports = {
             entry: {
                 main: ['./assets/index.js'],
                 test_shortcode: ['./shortcode/assets/test_shortcode/index.js'],
+                template_include: ['./modules/templateInclude/assets/index.js'],
             },
             webpackConfig: {}
         }
@@ -64,8 +65,7 @@ module.exports = {
     hasFlow: false,
     // Externals
     // <https://webpack.js.org/configuration/externals/>
-    externals: {
-    },
+    externals: {},
     // Webpack Aliases
     // <https://webpack.js.org/configuration/resolve/#resolve-alias>
     alias: undefined,
