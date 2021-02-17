@@ -16,7 +16,6 @@ class ZaloApiShortcode extends Shortcode {
 		Elhelper_Plugin::instance()->wpackio_enqueue( 'testapp', 'zaloApiShortcode' );
 		$template_path = plugin_dir_path( __FILE__ ) . 'views/index.php';
 
-		
 		return $this->render( $template_path, [ 'context' => 'test' ] );
 	}
 
