@@ -9,7 +9,7 @@ define( 'WP_HELPER_PATH', plugin_dir_path( __FILE__ ) );
 
 return [
 	'enqueue_scripts' => [
-		'script' => [
+		'script'      => [
 			'wp_register_script' => [
 				'jquery-md5-js'                     => [
 					plugins_url( '/assets/lib/jquery-lib/jquery.md5.js', __FILE__ ),
@@ -50,7 +50,7 @@ return [
 				],
 			],
 		],
-		'style'  => [
+		'style'       => [
 			'wp_enqueue_style'  => [
 				'elhelper-style' => [
 					'src'   => plugins_url( '/assets/css/el-helper-style.css', __FILE__ ),
@@ -70,7 +70,21 @@ return [
 					plugins_url( '/assets/lib/fontawesome/css/fontawesome.css', __FILE__ ),
 				],
 			],
-		]
+		],
+		'default_arr' => [
+			'item_script' => [
+				'src'       => '',
+				'dep'       => '',
+				'ver'       => '',
+				'in_footer' => '',
+			],
+			'item_style'  => [
+				'src'   => '',
+				'dep'   => '',
+				'ver'   => '',
+				'media' => '',
+			]
+		],
 
 	]
 ];

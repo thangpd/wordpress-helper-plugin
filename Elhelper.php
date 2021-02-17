@@ -230,27 +230,14 @@ class Elhelper_Plugin {
 		wp_enqueue_style( 'elhelper-style', plugins_url( '/assets/css/el-helper-style.css', __FILE__ ) );
 		wp_localize_script( 'elhelper-script', 'ajax_object',
 			array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'we_value' => 1234 ) );*/
-		$default_arr = [
-			'item_script' => [
-				'src'       => '',
-				'dep'       => '',
-				'ver'       => '',
-				'in_footer' => '',
-			],
-			'item_style'  => [
-				'src'   => '',
-				'dep'   => '',
-				'ver'   => '',
-				'media' => '',
-			]
-		];
-		$config      = self::getConfig();
+
+		$config = self::getConfig();
 		if ( ! empty( $config['enqueue_scripts'] ) ) {
 			foreach ( $config['enqueue_scripts']['script'] as $key => $item ) {
-				$this->enqueue_script_helper( $key, $item, $default_arr );
+				$this->enqueue_script_helper( $key, $item );
 			}
 			foreach ( $config['enqueue_scripts']['style'] as $key => $item ) {
-				$this->enqueue_style_helper( $key, $item, $default_arr );
+				$this->enqueue_style_helper( $key, $item );
 			}
 		}
 
@@ -268,9 +255,9 @@ class Elhelper_Plugin {
 	/**
 	 * Enqueue script and style from array list $this->config  config.php
 	 */
-	public function enqueue_script_helper( $callable, $arr_list, $default_arr ) {
+	public function enqueue_script_helper( $callable, $arr_list ) {
 		foreach ( $arr_list as $key => $item ) {
-			$item = array_merge( $default_arr['item_script'], $item );
+			$item = array_merge( self::getConfig()['enqueue_scripts']['default_arr']['item_script'], $item );
 			call_user_func( $callable, $key, $item['src'], $item['dep'], $item['ver'], $item['in_footer'] );
 			if ( isset( $item['locallize_script'] ) ) {
 				foreach ( $item['locallize_script'] as $lo_key => $lo_item ) {
@@ -285,9 +272,9 @@ class Elhelper_Plugin {
 	/**
 	 * Enqueue script and style from array list $this->config config.php
 	 */
-	public function enqueue_style_helper( $callable, $arr_list, $default_arr ) {
+	public function enqueue_style_helper( $callable, $arr_list ) {
 		foreach ( $arr_list as $key => $item ) {
-			$item = array_merge( $default_arr['item_style'], $item );
+			$item = array_merge( self::getConfig()['enqueue_scripts']['default_arr']['item_style'], $item );
 			call_user_func( $callable, $key, $item['src'], $item['dep'], $item['ver'], $item['media'] );
 		}
 	}
