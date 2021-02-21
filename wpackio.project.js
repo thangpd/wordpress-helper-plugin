@@ -24,10 +24,10 @@ module.exports = {
             name: 'testapp',
             entry: {
                 main: ['./assets/index.js'],
-                test_shortcode: ['./shortcode/assets/test_shortcode/index.js'],
-                template_include: ['./modules/templateInclude/assets/index.js'],
-                zaloapi: ['./modules/zaloApiModule/assets/index.js'],
-                zaloApiShortcode: ['./shortcode/zaloApi/assets'],
+                test_shortcode: ['./shortcode/testShortcode/assets/test_shortcode/index.js'],
+                zaloapiModeul: ['./modules/zaloApiModule/assets/index.js'],
+                zaloApiShortcode: ['./shortcode/zaloApi/assets/index.js'],
+                zaloApiGetAccessShortcode: ['./shortcode/zaloGetAccessToken/assets'],
             },
             webpackConfig: {}
         }
@@ -79,7 +79,7 @@ module.exports = {
     // Won't hurt because we use PHP to automate loading
     optimizeSplitChunks: true,
     // Usually PHP and other files to watch and reload when changed
-    watch: ['./inc|includes/**/*.php', './*.scss'],
+    watch: ['./inc|includes/**/*.php', './*.scss', './shortcode/**/*.scss'],
     // Files that you want to copy to your ultimate theme/plugin package
     // Supports glob matching from minimatch
     // @link <https://github.com/isaacs/minimatch#usage>

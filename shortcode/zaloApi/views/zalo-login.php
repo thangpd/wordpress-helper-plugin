@@ -6,40 +6,15 @@
 
 ?>
 
-zalo api shortcode
-
+    zalo Social api shortcode
 <?php
-/**
- * Date: 2/2/21
- * Time: 4:37 PM
- */
-echo 'thuanpham';
-ini_set( 'display_errors', 1 );
-ini_set( 'display_startup_errors', 1 );
-error_reporting( E_ALL );
-
-$return_file = fopen( 'return.txt', 'w' ) or die ( "unable to open return file!" );
-fwrite( $return_file, 'test' );
-fwrite( $return_file, json_encode( $_SERVER ) );
-fwrite( $return_file, json_encode( $_GET ) );
-fwrite( $return_file, json_encode( $_POST ) );
-
-fclose( $return_file );
-
-
-$myfile = fopen( "log.txt", "w" ) or die( "Unable to open file!" );
-
-echo '<pre>';
-print_r( $_SERVER );
-echo '</pre>';
-
 
 use Zalo\Zalo;
 
-
-$callBackUrl = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-
-fwrite( $myfile, $callBackUrl );
+$callBackUrl = home_url() . '/access-token';
+echo '<pre>';
+print_r( $callBackUrl );
+echo '</pre>';
 
 $config = array(
 	'app_id'       => ! empty( $_GET['app_id'] ) ? $_GET['app_id'] : 'app_id_null',
@@ -52,7 +27,11 @@ print_r( $config );
 echo '</pre>';
 
 
-$zalo = new Zalo( $config );
+try {
+	$zalo = new Zalo( $config );
+} catch ( \Zalo\Exceptions\ZaloSDKException $exception ) {
+	throw new \Zalo\Exceptions\ZaloSDKException( 'lỗi' );
+}
 echo '<pre>';
 echo 'zalo object<br>';
 print_r( $zalo );
@@ -93,8 +72,4 @@ echo '</pre>';
 //
 //}
 
-echo 'close file';
-echo '<br>';
-fclose( $myfile );
-
-echo 'done';
+?>

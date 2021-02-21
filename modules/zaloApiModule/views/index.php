@@ -3,14 +3,6 @@
  * Date: 1/17/21
  * Time: 2:53 PM
  */
-wp_head();
-echo __FILE__;
+$res = [ 'code' => 200 ];
 
-
-?>
-
-<div class="center">
-    index.php zaloapi
-</div>
-
-<?php wp_footer() ?>
+echo json_encode( $res );

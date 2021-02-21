@@ -11,6 +11,7 @@
 
 namespace Elhelper;
 require __DIR__ . '/vendor/autoload.php';
+require __DIR__.'/functions.php';
 $config = require __DIR__ . '/config.php';
 require_once __DIR__ . '/Elhelper.php';
 Elhelper_Plugin::instance( $config );

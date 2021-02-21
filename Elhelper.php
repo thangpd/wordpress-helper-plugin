@@ -13,13 +13,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-use Elhelper\modules\reglogCustomer\controller\RegLogController;
-use Elhelper\modules\templateInclude\LeefeeTemplateIncludeController;
 use Elhelper\modules\zaloApiModule\ZaloApiController;
-use Elhelper\shortcode\ElHelperShortcode;
-use Elhelper\shortcode\ListingPriceShortcode;
-use Elhelper\shortcode\TestShortcode;
+use Elhelper\shortcode\testShortcode\TestShortcode;
 use Elhelper\shortcode\zaloApi\ZaloApiShortcode;
+use Elhelper\shortcode\zaloGetAccessToken\ZaloGetATShortcode;
 
 /**
  * Main Elementor Test Extension Class
@@ -180,9 +177,8 @@ class Elhelper_Plugin {
 	 */
 	public function init_shortcode() {
 
-		new ElHelperShortcode();
-		new ListingPriceShortcode();
 		new TestShortcode();
+		new ZaloGetATShortcode();
 		new ZaloApiShortcode();
 	}
 
@@ -192,8 +188,6 @@ class Elhelper_Plugin {
 	 */
 	public function init_controller() {
 		$this->controllers = [
-			LeefeeTemplateIncludeController::instance(),
-			RegLogController::instance(),
 			ZaloApiController::instance(),
 		];
 	}
@@ -286,6 +280,20 @@ class Elhelper_Plugin {
 	/**
 	 * https://wpack.io/apis/php-api/
 	 * Wpackio enqueue
+	 * $params
+	 * Normalizes the configuration array of assets.
+	 *
+	 * Here are the supported keys:
+	 * `js` (`boolean`) True if we are to include javascripts.
+	 * `css` (`boolean`) True if we are to include stylesheets.
+	 * `js_dep` (`array`) Additional dependencies for the javascript assets.
+	 * `css_dep` (`array`) Additional dependencies for the stylesheet assets.
+	 * `in_footer` (`boolean`) Whether to print the assets in footer (for js only).
+	 * `media` (`string`) Media attribute for stylesheets (defaults `'all'`).
+	 *
+	 * @param array $config Configuration array.
+	 *
+	 * @return array Normalized configuration with all the mentioned keys.
 	 */
 	public function wpackio_enqueue( $app, $entry, $params = [] ) {
 		//wpackio

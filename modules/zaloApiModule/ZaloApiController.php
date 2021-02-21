@@ -38,7 +38,7 @@ class ZaloApiController extends Controller {
 		//add_query_arg( [] ) return request uri when empty array is pass as parameter.
 		//if ( str_replace( '/', '', add_query_arg( [] ) ) == 'test' ) {
 		$get_queried_object = get_queried_object();
-		if ( isset( $get_queried_object ) && $get_queried_object->post_name == 'zaloapi' ) {
+		if ( isset( $get_queried_object ) && $get_queried_object->post_name == 'receive-webhook' ) {
 
 //			$plugin_dir_path = plugin_dir_path( __FILE__ ) . 'views/index.php';
 //			$template        = $plugin_dir_path;
