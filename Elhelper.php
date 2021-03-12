@@ -178,8 +178,6 @@ class Elhelper_Plugin {
 	public function init_shortcode() {
 
 		new TestShortcode();
-		new ZaloGetATShortcode();
-		new ZaloApiShortcode();
 	}
 
 	/**
